@@ -1,5 +1,6 @@
 package gcd
 
+// CalculateGCDArray calculates the GCD for an array of integers
 func CalculateGCDArray(integers []int) int {
 	res := integers[0]
 
@@ -10,6 +11,7 @@ func CalculateGCDArray(integers []int) int {
 	return res
 }
 
+// calculateGCD calculates the GCD for 2 integers.
 func calculateGCD(a int, b int) int {
 
 	if a < b {
