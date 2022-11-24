@@ -12,9 +12,9 @@ func TestCalculateGCDArray(t *testing.T) {
 	exp2 := 11
 
 	if val1 != exp1 {
-		t.Fatalf("GCD Test 1: Expected %v but got %v", exp1, val1)
+		t.Fatalf("GCD Test 1: Expected \"%d\" but got \"%d\"", exp1, val1)
 	}
 	if val2 != exp2 {
-		t.Fatalf("GCD Test 2: Expected %v but got %v", exp2, val2)
+		t.Fatalf("GCD Test 2: Expected \"%d\" but got \"%d\"", exp2, val2)
 	}
 }

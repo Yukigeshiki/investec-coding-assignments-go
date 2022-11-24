@@ -116,7 +116,7 @@ func getPrettyPrintingString(s string) string {
 	return NotAvailable
 }
 
-// getPrettyPrintingLineDetail returns either the address line details or "Not available".
+// getPrettyPrintingLineDetail returns either the address line details properly formatted or "Not available".
 func getPrettyPrintingLineDetail(ld LineDetail) string {
 	var (
 		ml1 bool
