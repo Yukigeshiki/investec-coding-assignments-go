@@ -44,7 +44,7 @@ func (a *Address) GetPrettyPrinting() string {
 	ct, ps, pc, c := a.getPrettyPrintingValues()
 
 	return fmt.Sprintf("%s: ", a.Type.Name) +
-		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(a.LineDetail)) +
+		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(&a.LineDetail)) +
 		fmt.Sprintf("- %s ", ct) +
 		fmt.Sprintf("- %s ", ps) +
 		fmt.Sprintf("- %s ", pc) +
@@ -82,8 +82,8 @@ func (a *Address) Validate() []string {
 // getAddressChecks returns a tuple of boolean values for address field validation checks.
 func (a *Address) getAddressChecks() (bool, bool, bool, bool) {
 	return isValidPostalCode(a.PostalCode),
-		isValidCountry(a.Country),
-		isValidLineDetail(a.LineDetail),
+		isValidCountry(&a.Country),
+		isValidLineDetail(&a.LineDetail),
 		a.hasValidProvince()
 }
 
@@ -114,7 +114,7 @@ func getPrettyPrintingString(s string) string {
 }
 
 // getPrettyPrintingLineDetail returns either the address line details properly formatted or "Not available".
-func getPrettyPrintingLineDetail(ld LineDetail) string {
+func getPrettyPrintingLineDetail(ld *LineDetail) string {
 	var (
 		ml1 bool
 		ml2 bool
@@ -142,16 +142,16 @@ func getPrettyPrintingLineDetail(ld LineDetail) string {
 
 // isValidPostalCode checks whether the address has a valid postal code.
 func isValidPostalCode(code string) bool {
-	v, _ := regexp.MatchString("[0-9]+?", code)
+	v, _ := regexp.MatchString("[0-9]+", code)
 	return v
 }
 
 // isValidLineDetail checks whether the address line details are valid.
-func isValidLineDetail(ld LineDetail) bool {
+func isValidLineDetail(ld *LineDetail) bool {
 	return ld.Line1 != "" || ld.Line2 != ""
 }
 
 // isValidCountry checks if the country is valid, i.e. it has a non-empty name.
-func isValidCountry(c Country) bool {
+func isValidCountry(c *Country) bool {
 	return c.Name != ""
 }
