@@ -8,33 +8,33 @@ import (
 const NotAvailable string = "Not available"
 
 type Address struct {
-	ID               string          `json:"id"`
-	AddrType         addrType        `json:"type"`
-	AddrLineDetail   addrLineDetail  `json:"addressLineDetail,omitempty"`
-	ProvinceOrState  provinceOrState `json:"provinceOrState,omitempty"`
-	Country          country         `json:"country,omitempty"`
-	CityOrTown       string          `json:"cityOrTown,omitempty"`
-	PostalCode       string          `json:"postalCode,omitempty"`
-	SuburbOrDistrict string          `json:"suburbOrDistrict,omitempty"`
-	LastUpdated      string          `json:"lastUpdated"`
+	ID               string `json:"id"`
+	AddrType         `json:"type"`
+	AddrLineDetail   `json:"addressLineDetail,omitempty"`
+	ProvinceOrState  `json:"provinceOrState,omitempty"`
+	Country          `json:"country,omitempty"`
+	CityOrTown       string `json:"cityOrTown,omitempty"`
+	PostalCode       string `json:"postalCode,omitempty"`
+	SuburbOrDistrict string `json:"suburbOrDistrict,omitempty"`
+	LastUpdated      string `json:"lastUpdated"`
 }
 
-type addrType struct {
+type AddrType struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
 
-type addrLineDetail struct {
+type AddrLineDetail struct {
 	Line1 string `json:"line1,omitempty"`
 	Line2 string `json:"line2,omitempty"`
 }
 
-type provinceOrState struct {
+type ProvinceOrState struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
 
-type country struct {
+type Country struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
@@ -117,7 +117,7 @@ func getPrettyPrintingString(s string) string {
 }
 
 // getPrettyPrintingLineDetail returns either the address line details or "Not available".
-func getPrettyPrintingLineDetail(ld addrLineDetail) string {
+func getPrettyPrintingLineDetail(ld AddrLineDetail) string {
 	var (
 		ml1 bool
 		ml2 bool
@@ -150,11 +150,11 @@ func isValidPostalCode(code string) bool {
 }
 
 // isValidLineDetail checks whether the address line details are valid.
-func isValidLineDetail(ld addrLineDetail) bool {
+func isValidLineDetail(ld AddrLineDetail) bool {
 	return ld.Line1 != "" || ld.Line2 != ""
 }
 
 // isValidCountry checks if the country is valid, i.e. it has a non-empty name.
-func isValidCountry(c country) bool {
+func isValidCountry(c Country) bool {
 	return c.Name != ""
 }
