@@ -7,18 +7,6 @@ import (
 
 const notAvailable string = "Not available"
 
-type Address struct {
-	ID               string `json:"id"`
-	Type             `json:"type"`
-	LineDetail       `json:"addressLineDetail,omitempty"`
-	ProvinceOrState  `json:"provinceOrState,omitempty"`
-	Country          `json:"country,omitempty"`
-	CityOrTown       string `json:"cityOrTown,omitempty"`
-	PostalCode       string `json:"postalCode,omitempty"`
-	SuburbOrDistrict string `json:"suburbOrDistrict,omitempty"`
-	LastUpdated      string `json:"lastUpdated"`
-}
-
 type Type struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
@@ -37,6 +25,18 @@ type ProvinceOrState struct {
 type Country struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
+}
+
+type Address struct {
+	ID               string `json:"id"`
+	Type             `json:"type"`
+	LineDetail       `json:"addressLineDetail,omitempty"`
+	ProvinceOrState  `json:"provinceOrState,omitempty"`
+	Country          `json:"country,omitempty"`
+	CityOrTown       string `json:"cityOrTown,omitempty"`
+	PostalCode       string `json:"postalCode,omitempty"`
+	SuburbOrDistrict string `json:"suburbOrDistrict,omitempty"`
+	LastUpdated      string `json:"lastUpdated"`
 }
 
 // GetPrettyPrinting is the solution to a.
@@ -63,7 +63,6 @@ func (addr *Address) Validate() []string {
 	var vErrs []string
 
 	checkPc, checkC, checkLd, checkP := addr.getAddressChecks()
-
 	if !checkPc {
 		vErrs = append(vErrs, "You must include a valid postal code")
 	}
@@ -99,12 +98,10 @@ func (addr *Address) hasValidProvince() bool {
 // getPrettyPrintingValues returns a tuple of strings used to pretty print the address.
 // If a value does not exist, it is returned as "Not available".
 func (addr *Address) getPrettyPrintingValues() (string, string, string, string) {
-
 	ps := getPrettyPrintingString(addr.ProvinceOrState.Name)
 	c := getPrettyPrintingString(addr.Country.Name)
 	ct := getPrettyPrintingString(addr.CityOrTown)
 	pc := getPrettyPrintingString(addr.PostalCode)
-
 	return ct, ps, pc, c
 }
 
