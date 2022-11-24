@@ -40,24 +40,20 @@ func (a *Addresses) ValidateAddresses() []string {
 
 // init imports a json file of addresses.
 func init() {
-	var (
-		err       error
-		jsonFile  *os.File
-		byteValue []byte
-		absPath   string
-	)
-
-	if absPath, err = filepath.Abs(jsonFilePath); err != nil {
+	absPath, err := filepath.Abs(jsonFilePath)
+	if err != nil {
 		panic(err)
 	}
-	if jsonFile, err = os.Open(absPath); err != nil {
+	jsonFile, err := os.Open(absPath)
+	if err != nil {
 		panic(err)
 	}
 	defer func(jsonFile *os.File) {
 		_ = jsonFile.Close()
 	}(jsonFile)
 
-	if byteValue, err = io.ReadAll(jsonFile); err != nil {
+	byteValue, err := io.ReadAll(jsonFile)
+	if err != nil {
 		panic(err)
 	}
 	if err = json.Unmarshal(byteValue, &addrs); err != nil {
