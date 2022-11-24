@@ -9,8 +9,8 @@ const NotAvailable string = "Not available"
 
 type Address struct {
 	ID               string `json:"id"`
-	AddrType         `json:"type"`
-	AddrLineDetail   `json:"addressLineDetail,omitempty"`
+	Type             `json:"type"`
+	LineDetail       `json:"addressLineDetail,omitempty"`
 	ProvinceOrState  `json:"provinceOrState,omitempty"`
 	Country          `json:"country,omitempty"`
 	CityOrTown       string `json:"cityOrTown,omitempty"`
@@ -19,12 +19,12 @@ type Address struct {
 	LastUpdated      string `json:"lastUpdated"`
 }
 
-type AddrType struct {
+type Type struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
 
-type AddrLineDetail struct {
+type LineDetail struct {
 	Line1 string `json:"line1,omitempty"`
 	Line2 string `json:"line2,omitempty"`
 }
@@ -43,8 +43,8 @@ type Country struct {
 func (addr *Address) GetPrettyPrinting() string {
 	ct, ps, pc, c := addr.getPrettyPrintingValues()
 
-	return fmt.Sprintf("%s: ", addr.AddrType.Name) +
-		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(addr.AddrLineDetail)) +
+	return fmt.Sprintf("%s: ", addr.Type.Name) +
+		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(addr.LineDetail)) +
 		fmt.Sprintf("- %s ", ct) +
 		fmt.Sprintf("- %s ", ps) +
 		fmt.Sprintf("- %s ", pc) +
@@ -84,7 +84,7 @@ func (addr *Address) Validate() []string {
 func (addr *Address) getAddressChecks() (bool, bool, bool, bool) {
 	return isValidPostalCode(addr.PostalCode),
 		isValidCountry(addr.Country),
-		isValidLineDetail(addr.AddrLineDetail),
+		isValidLineDetail(addr.LineDetail),
 		addr.hasValidProvince()
 }
 
@@ -117,7 +117,7 @@ func getPrettyPrintingString(s string) string {
 }
 
 // getPrettyPrintingLineDetail returns either the address line details or "Not available".
-func getPrettyPrintingLineDetail(ld AddrLineDetail) string {
+func getPrettyPrintingLineDetail(ld LineDetail) string {
 	var (
 		ml1 bool
 		ml2 bool
@@ -150,7 +150,7 @@ func isValidPostalCode(code string) bool {
 }
 
 // isValidLineDetail checks whether the address line details are valid.
-func isValidLineDetail(ld AddrLineDetail) bool {
+func isValidLineDetail(ld LineDetail) bool {
 	return ld.Line1 != "" || ld.Line2 != ""
 }
 
