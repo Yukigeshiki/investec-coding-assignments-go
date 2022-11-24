@@ -5,8 +5,8 @@ import "testing"
 /// Note: Tests are not exhaustive, they are just to demonstrate the assignment functions
 
 func TestCalculateGCDArray(t *testing.T) {
-	val1 := CalculateGCDArray([]int{4, 64, 32, 120})
-	val2 := CalculateGCDArray([]int{11, 33, 99, 198})
+	val1 := CalculateGCDArray(4, 64, 32, 120)
+	val2 := CalculateGCDArray(11, 33, 99, 198)
 
 	exp1 := 4
 	exp2 := 11

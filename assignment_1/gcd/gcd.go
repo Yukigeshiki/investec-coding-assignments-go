@@ -1,10 +1,10 @@
 package gcd
 
 // CalculateGCDArray calculates the GCD for an array of integers
-func CalculateGCDArray(integers []int) int {
-	res := integers[0]
+func CalculateGCDArray(args ...int) int {
+	res := args[0]
 
-	for _, i := range integers {
+	for _, i := range args {
 		res = calculateGCD(res, i)
 	}
 
