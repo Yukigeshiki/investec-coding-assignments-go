@@ -1,11 +1,11 @@
 # investec-coding-assignments-go
 Investec Bank coding assignments in Go
 
-These assignments are required by Investec to be done in Java, but I decided to do them in Go as well. 
+These assignments are required by Investec to be done in Java, but I thought I'd do them in Go as well. 
 
 ### Assignment Questions
 
-1. Find the highest common factor for a given array of integers.
+1. Find the greatest common divisor for a given array of integers.
 
 
 2. Given the attached addresses.json file which contains an array of addresses, do the following:
