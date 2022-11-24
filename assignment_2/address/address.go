@@ -40,11 +40,11 @@ type Address struct {
 }
 
 // GetPrettyPrinting is the solution to a.
-func (addr *Address) GetPrettyPrinting() string {
-	ct, ps, pc, c := addr.getPrettyPrintingValues()
+func (a *Address) GetPrettyPrinting() string {
+	ct, ps, pc, c := a.getPrettyPrintingValues()
 
-	return fmt.Sprintf("%s: ", addr.Type.Name) +
-		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(addr.LineDetail)) +
+	return fmt.Sprintf("%s: ", a.Type.Name) +
+		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(a.LineDetail)) +
 		fmt.Sprintf("- %s ", ct) +
 		fmt.Sprintf("- %s ", ps) +
 		fmt.Sprintf("- %s ", pc) +
@@ -52,17 +52,17 @@ func (addr *Address) GetPrettyPrinting() string {
 }
 
 // IsValid is the solution to d.
-func (addr *Address) IsValid() bool {
-	checkPc, checkC, checkLd, checkP := addr.getAddressChecks()
+func (a *Address) IsValid() bool {
+	checkPc, checkC, checkLd, checkP := a.getAddressChecks()
 	return checkPc && checkC && checkLd && checkP
 }
 
 // Validate checks whether the needed address fields are valid. If a field is not valid an error message is added
 // to a string slice and the slice is returned.
-func (addr *Address) Validate() []string {
+func (a *Address) Validate() []string {
 	var vErrs []string
 
-	checkPc, checkC, checkLd, checkP := addr.getAddressChecks()
+	checkPc, checkC, checkLd, checkP := a.getAddressChecks()
 	if !checkPc {
 		vErrs = append(vErrs, "You must include a valid postal code")
 	}
@@ -80,28 +80,28 @@ func (addr *Address) Validate() []string {
 }
 
 // getAddressChecks returns a tuple of boolean values for address field validation checks.
-func (addr *Address) getAddressChecks() (bool, bool, bool, bool) {
-	return isValidPostalCode(addr.PostalCode),
-		isValidCountry(addr.Country),
-		isValidLineDetail(addr.LineDetail),
-		addr.hasValidProvince()
+func (a *Address) getAddressChecks() (bool, bool, bool, bool) {
+	return isValidPostalCode(a.PostalCode),
+		isValidCountry(a.Country),
+		isValidLineDetail(a.LineDetail),
+		a.hasValidProvince()
 }
 
 // hasValidProvince checks whether a province is included when the country is ZA.
-func (addr *Address) hasValidProvince() bool {
-	if addr.Country.Code == "ZA" {
-		return addr.ProvinceOrState.Name != ""
+func (a *Address) hasValidProvince() bool {
+	if a.Country.Code == "ZA" {
+		return a.ProvinceOrState.Name != ""
 	}
 	return true
 }
 
 // getPrettyPrintingValues returns a tuple of strings used to pretty print the address.
 // If a value does not exist, it is returned as "Not available".
-func (addr *Address) getPrettyPrintingValues() (string, string, string, string) {
-	ps := getPrettyPrintingString(addr.ProvinceOrState.Name)
-	c := getPrettyPrintingString(addr.Country.Name)
-	ct := getPrettyPrintingString(addr.CityOrTown)
-	pc := getPrettyPrintingString(addr.PostalCode)
+func (a *Address) getPrettyPrintingValues() (string, string, string, string) {
+	ps := getPrettyPrintingString(a.ProvinceOrState.Name)
+	c := getPrettyPrintingString(a.Country.Name)
+	ct := getPrettyPrintingString(a.CityOrTown)
+	pc := getPrettyPrintingString(a.PostalCode)
 	return ct, ps, pc, c
 }
 

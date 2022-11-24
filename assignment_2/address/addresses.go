@@ -15,17 +15,17 @@ type Addresses []Address
 var addrs *Addresses
 
 // PrettyPrintAddresses is the solution to b.
-func (addrs *Addresses) PrettyPrintAddresses() {
-	for _, addr := range *addrs {
+func (a *Addresses) PrettyPrintAddresses() {
+	for _, addr := range *a {
 		fmt.Println(addr.GetPrettyPrinting())
 	}
 }
 
 // ValidateAddresses is the solution to e.
-func (addrs *Addresses) ValidateAddresses() []string {
+func (a *Addresses) ValidateAddresses() []string {
 	var errStrings []string
 
-	for _, addr := range *addrs {
+	for _, addr := range *a {
 		vErrs := addr.Validate()
 		if len(vErrs) != 0 {
 			errStrings = append(
