@@ -1,7 +1,7 @@
 # investec-coding-assignments-go
 Investec Bank coding assignments in Go
 
-These assignments are normally written in Java, but I decided to do it in Go as well for fun. 
+These assignments are required by Investec to be done in Java, but I decided to do them in Go as well. 
 
 ### Assignment Questions
 
