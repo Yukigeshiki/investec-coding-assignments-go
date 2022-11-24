@@ -41,14 +41,12 @@ type Address struct {
 
 // GetPrettyPrinting is the solution to a.
 func (a *Address) GetPrettyPrinting() string {
-	ct, ps, pc, c := a.getPrettyPrintingValues()
-
 	return fmt.Sprintf("%s: ", a.Type.Name) +
 		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(&a.LineDetail)) +
-		fmt.Sprintf("- %s ", ct) +
-		fmt.Sprintf("- %s ", ps) +
-		fmt.Sprintf("- %s ", pc) +
-		fmt.Sprintf("- %s", c)
+		fmt.Sprintf("- %s ", getPrettyPrintingString(a.CityOrTown)) +
+		fmt.Sprintf("- %s ", getPrettyPrintingString(a.ProvinceOrState.Name)) +
+		fmt.Sprintf("- %s ", getPrettyPrintingString(a.PostalCode)) +
+		fmt.Sprintf("- %s", getPrettyPrintingString(a.Country.Name))
 }
 
 // IsValid is the solution to d.
@@ -93,16 +91,6 @@ func (a *Address) hasValidProvince() bool {
 		return a.ProvinceOrState.Name != ""
 	}
 	return true
-}
-
-// getPrettyPrintingValues returns a tuple of strings used to pretty print the address.
-// If a value does not exist, it is returned as "Not available".
-func (a *Address) getPrettyPrintingValues() (string, string, string, string) {
-	ps := getPrettyPrintingString(a.ProvinceOrState.Name)
-	c := getPrettyPrintingString(a.Country.Name)
-	ct := getPrettyPrintingString(a.CityOrTown)
-	pc := getPrettyPrintingString(a.PostalCode)
-	return ct, ps, pc, c
 }
 
 // getPrettyPrintingString returns either the given string, or if it's empty, "Not available".
