@@ -8,7 +8,7 @@ These assignments are normally written in Java, but I decided to do it in Go as 
 1. Find the highest common factor for a given array of integers.
 
 
-2. Given the attached addresses.json file which contains an array of address, do the following:
+2. Given the attached addresses.json file which contains an array of addresses, do the following:
 
     a. Write a function to return a pretty print version of an address in the format: Type: Line details - city - province/state - postal code – country.
 
