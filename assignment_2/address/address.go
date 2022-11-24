@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-const NotAvailable string = "Not available"
+const notAvailable string = "Not available"
 
 type Address struct {
 	ID               string `json:"id"`
@@ -113,7 +113,7 @@ func getPrettyPrintingString(s string) string {
 	if s != "" {
 		return s
 	}
-	return NotAvailable
+	return notAvailable
 }
 
 // getPrettyPrintingLineDetail returns either the address line details properly formatted or "Not available".
@@ -133,7 +133,7 @@ func getPrettyPrintingLineDetail(ld LineDetail) string {
 
 	switch {
 	case ml1 && ml2:
-		return NotAvailable
+		return notAvailable
 	case ml1:
 		return ld.Line2
 	case ml2:

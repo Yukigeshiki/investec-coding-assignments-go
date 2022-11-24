@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 )
 
+const jsonFilePath = "../addresses.json"
+
 type Addresses []Address
 
 var addrs *Addresses
@@ -45,7 +47,7 @@ func init() {
 		absPath   string
 	)
 
-	if absPath, err = filepath.Abs("../addresses.json"); err != nil {
+	if absPath, err = filepath.Abs(jsonFilePath); err != nil {
 		panic(err)
 	}
 	if jsonFile, err = os.Open(absPath); err != nil {
