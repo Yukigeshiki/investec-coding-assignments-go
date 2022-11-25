@@ -12,7 +12,7 @@ const jsonFilePath = "../addresses.json"
 
 type Addresses []Address
 
-var addrs *Addresses
+var addrs Addresses
 
 // PrettyPrintAddresses is the solution to b.
 func (a *Addresses) PrettyPrintAddresses() {

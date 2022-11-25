@@ -42,7 +42,7 @@ type Address struct {
 // GetPrettyPrinting is the solution to a.
 func (a *Address) GetPrettyPrinting() string {
 	return fmt.Sprintf("%s: ", a.Type.Name) +
-		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(&a.LineDetail)) +
+		fmt.Sprintf("%s ", getPrettyPrintingLineDetail(a.LineDetail)) +
 		fmt.Sprintf("- %s ", getPrettyPrintingString(a.CityOrTown)) +
 		fmt.Sprintf("- %s ", getPrettyPrintingString(a.ProvinceOrState.Name)) +
 		fmt.Sprintf("- %s ", getPrettyPrintingString(a.PostalCode)) +
@@ -80,8 +80,8 @@ func (a *Address) Validate() []string {
 // getAddressChecks returns a tuple of boolean values for address field validation checks.
 func (a *Address) getAddressChecks() (bool, bool, bool, bool) {
 	return isValidPostalCode(a.PostalCode),
-		isValidCountry(&a.Country),
-		isValidLineDetail(&a.LineDetail),
+		isValidCountry(a.Country),
+		isValidLineDetail(a.LineDetail),
 		a.hasValidProvince()
 }
 
@@ -102,7 +102,7 @@ func getPrettyPrintingString(s string) string {
 }
 
 // getPrettyPrintingLineDetail returns either the address line details properly formatted or "Not available".
-func getPrettyPrintingLineDetail(ld *LineDetail) string {
+func getPrettyPrintingLineDetail(ld LineDetail) string {
 	var (
 		ml1 bool
 		ml2 bool
@@ -135,11 +135,11 @@ func isValidPostalCode(code string) bool {
 }
 
 // isValidLineDetail checks whether the address line details are valid.
-func isValidLineDetail(ld *LineDetail) bool {
+func isValidLineDetail(ld LineDetail) bool {
 	return ld.Line1 != "" || ld.Line2 != ""
 }
 
 // isValidCountry checks if the country is valid, i.e. it has a non-empty name.
-func isValidCountry(c *Country) bool {
+func isValidCountry(c Country) bool {
 	return c.Name != ""
 }
