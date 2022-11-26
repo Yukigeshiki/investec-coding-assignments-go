@@ -7,7 +7,7 @@ import (
 
 /// Note: Tests are not exhaustive, they are just to demonstrate the assignment functions
 
-// TestGetPrettyPrinting tests a. and by extension b.
+// TestGetPrettyPrinting tests a.
 func TestGetPrettyPrinting(t *testing.T) {
 	assert.Equal(
 		t,
