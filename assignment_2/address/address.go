@@ -7,24 +7,20 @@ import (
 
 const notAvailable string = "Not available"
 
-type Type struct {
+type CodeAndName struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
+
+type Type CodeAndName
+
+type ProvinceOrState CodeAndName
+
+type Country CodeAndName
 
 type LineDetail struct {
 	Line1 string `json:"line1,omitempty"`
 	Line2 string `json:"line2,omitempty"`
-}
-
-type ProvinceOrState struct {
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-type Country struct {
-	Code string `json:"code"`
-	Name string `json:"name"`
 }
 
 type Address struct {
