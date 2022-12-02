@@ -22,9 +22,7 @@ func (a *Addresses) PrettyPrintAddresses() {
 }
 
 // ValidateAddresses is the solution to e.
-func (a *Addresses) ValidateAddresses() []string {
-	var errStrings []string
-
+func (a *Addresses) ValidateAddresses() (errStrings []string) {
 	for _, addr := range *a {
 		vErrs := addr.Validate()
 		if len(vErrs) != 0 {
@@ -35,7 +33,7 @@ func (a *Addresses) ValidateAddresses() []string {
 		}
 	}
 
-	return errStrings
+	return
 }
 
 // init imports a json file of addresses.

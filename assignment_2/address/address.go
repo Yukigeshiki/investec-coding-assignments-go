@@ -53,8 +53,7 @@ func (a *Address) IsValid() bool {
 
 // Validate checks whether the needed address fields are valid. If a field is not valid an error message is added
 // to a string slice and the slice is returned.
-func (a *Address) Validate() []string {
-	var vErrs []string
+func (a *Address) Validate() (vErrs []string) {
 
 	checkPc, checkC, checkLd, checkP := a.getAddressChecks()
 	if !checkPc {
@@ -70,7 +69,7 @@ func (a *Address) Validate() []string {
 		vErrs = append(vErrs, "You must include a province if your country is ZA")
 	}
 
-	return vErrs
+	return
 }
 
 // getAddressChecks returns a tuple of boolean values for address field validation checks.
@@ -125,9 +124,9 @@ func getPrettyPrintingLineDetail(ld LineDetail) string {
 }
 
 // isValidPostalCode checks whether the address has a valid postal code.
-func isValidPostalCode(code string) bool {
-	v, _ := regexp.MatchString("[0-9]+", code)
-	return v
+func isValidPostalCode(code string) (v bool) {
+	v, _ = regexp.MatchString("[0-9]+", code)
+	return
 }
 
 // isValidLineDetail checks whether the address line details are valid.
