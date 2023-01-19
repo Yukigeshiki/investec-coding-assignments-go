@@ -98,18 +98,9 @@ func getPrettyPrintingString(s string) string {
 
 // getPrettyPrintingLineDetail returns either the address line details properly formatted or "Not available".
 func getPrettyPrintingLineDetail(ld LineDetail) string {
-	var (
-		ml1 bool
-		ml2 bool
-	)
-
 	// check if lines are missing
-	if ld.Line1 == "" {
-		ml1 = true
-	}
-	if ld.Line2 == "" {
-		ml2 = true
-	}
+	ml1 := ld.Line1 == ""
+	ml2 := ld.Line2 == ""
 
 	switch {
 	case ml1 && ml2:
