@@ -47,37 +47,30 @@ func (a *Address) GetPrettyPrinting() string {
 
 // IsValid is the solution to d.
 func (a *Address) IsValid() bool {
-	checkPc, checkC, checkLd, checkP := a.getAddressChecks()
-	return checkPc && checkC && checkLd && checkP
+	return isValidPostalCode(a.PostalCode) &&
+		isValidCountry(a.Country) &&
+		isValidLineDetail(a.LineDetail) &&
+		a.hasValidProvince()
 }
 
 // Validate checks whether the needed address fields are valid. If a field is not valid an error message is added
 // to a string slice and the slice is returned.
 func (a *Address) Validate() (vErrs []string) {
 
-	checkPc, checkC, checkLd, checkP := a.getAddressChecks()
-	if !checkPc {
+	if !isValidPostalCode(a.PostalCode) {
 		vErrs = append(vErrs, "You must include a valid postal code")
 	}
-	if !checkC {
+	if !isValidCountry(a.Country) {
 		vErrs = append(vErrs, "You must include a country")
 	}
-	if !checkLd {
+	if !isValidLineDetail(a.LineDetail) {
 		vErrs = append(vErrs, "You must include valid address details (line 1 and/or 2 must be filled in)")
 	}
-	if !checkP {
+	if !a.hasValidProvince() {
 		vErrs = append(vErrs, "You must include a province if your country is ZA")
 	}
 
 	return
-}
-
-// getAddressChecks returns a tuple of boolean values for address field validation checks.
-func (a *Address) getAddressChecks() (bool, bool, bool, bool) {
-	return isValidPostalCode(a.PostalCode),
-		isValidCountry(a.Country),
-		isValidLineDetail(a.LineDetail),
-		a.hasValidProvince()
 }
 
 // hasValidProvince checks whether a province is included when the country is ZA.
